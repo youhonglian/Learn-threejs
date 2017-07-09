@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>three.js粒子</title>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+    <script>
+        $(function(){
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, .1, 1000);
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(new THREE.Color(0x000000, 1.0));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            camera.position.set(0,0,155);
+            document.body.appendChild(renderer.domElement);
+
+            createParticles();
+           function createParticles(){
+               var geom = new THREE.Geometry();
+               var material = new THREE.PointCloudMaterial({
+                   size: 5, 
+                   vertexColors: true,
+                   color: 0xffffff
+               });
+               for(var x=-5; x<5; x++){
+                   for(var y=-5; y<5; y++){
+                       var particle = new THREE.Vector3(x*10, y*10, 0);
+                       geom.vertices.push(particle);
+                       geom.colors.push(new THREE.Color(Math.random()*0x080808));
+                   }
+               }
+               var cloud = new THREE.PointCloud(geom, material);
+               scene.add(cloud);
+           }
+
+            render();
+            function render() {
+                renderer.setClearColor(0xCCCCCC);
+                scene.rotation.x += 0.05;
+                scene.rotation.y += 0.05;
+                scene.rotation.z += 0.05;
+                 renderer.render(scene, camera);
+                requestAnimationFrame(render);
+               
+            }
+        })
+    </script>
+</body>
+</html>
