@@ -39,16 +39,16 @@
             position: absolute;
         }
         .face1{
-            background: pink;
+            background: #3498db;
             transform: translate3d(50px,50px,50px); 
         }
         .face2{
-            background: bisque;
+            background: #9b59b6;
             transform-origin: 0 0;
             transform: translate3d(150px,50px,50px) rotateY(90deg);
         }
         .face3{
-            background: lightsalmon;
+            background: #f1c40f;
             transform-origin: 0 0;
             transform: translate3d(50px,50px,50px) rotateX(-90deg);
         }
@@ -59,13 +59,13 @@
          rotateX(-90deg);
     }
     .face5{
-        background: palegreen;
+        background: #2ecc71;
         transform-origin: 100% 100%;
         transform: translate3d(-50%,50px,50px)
          rotateY(-90deg);
     }
     .face6 {
-        background: orange;
+        background: #34495e;
         transform: translate3d(50px,50px,-50px)
          rotateY(-180deg);
     }
@@ -86,29 +86,27 @@
     </style>
 </head>
 <body>
-<div class="camera">
-    <div class="box">
-        <div class="face face1">1</div>
-        <div class="face face2">2</div>
-        <div class="face face3">3</div>
-        <div class="face face4">4</div>
-        <div class="face face5">5</div>
-        <div class="face face6">6</div>
+    <div class="camera">
+        <div class="box">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+        </div>
     </div>
-</div>
+    <script>
+        var box = document.querySelector('.box');
+        window.addEventListener('deviceorientation',function(event){
+            var alpha = event.alpha,
+                beta = event.beta,
+                gamma = event.gamma;
 
-<script>
-    var box = document.querySelector('.box');
-    window.addEventListener('deviceorientation', function(event) {
-        var alpha = event.alpha,
-            beta = event.beta,
-            gama= event.gama;
-
-        box.style.transform = `rotateX(${beta}deg) rotateY(${gama}deg) rotateZ(${alpha}deg)`
-        box.style.webKitTransform = `rotateX(${beta}deg) rotateY(${gama}deg) rotateZ(${alpha}deg)`
-        box.style.mozTransform = `rotateX(${beta}deg) rotateY(${gama}deg) rotateZ(${alpha}deg)`
-          
-    })
-</script>
+                box.style.transform = `rotateX(${beta}deg) rotateY(${gamma}deg) rotateZ(${alpha}deg)`;
+                box.style.webKitTransform = `rotateX(${beta}deg) rotateY(${gamma}deg) rotateZ(${alpha}deg)`;
+        })
+    </script>
 </body>
 </html>
+
